@@ -52,25 +52,35 @@ def start():
         b = Radiobutton(framemode, text=mode, variable=modevar, value=mode, relief='groove',
                         bg=BGCOLOR, indicatoron=0, selectcolor=DRKYLLW, activebackground=OYELLOW)
         b.grid(row=i, column=1)
+        b.config(state="disabled")  ### DELETE THIS ROW AFTER FINISHED
         
     for j, qt in enumerate(QTYPE):
         b = Radiobutton(frametype, text=qt, variable=qtvar, value=qt, relief='groove', command=lambda:createOpts(1), 
                         bg=BGCOLOR, indicatoron=0, selectcolor=DRKYLLW, activebackground=OYELLOW)
         b.grid(row=j+2, column=1)
+        b.config(state="disabled")  ### DELETE THIS ROW AFTER FINISHED
     
     #wtf are those variable names
     func7 = Button(funcframe, text='練習不熟的單字', height=2, bg=DRKYLLW, width=14, activebackground=DRKYLLW,
                    relief='groove', highlightbackground=DRKYLLW)
     func7.pack()
+    func7.config(state="disabled")  ### DELETE THIS ROW AFTER FINISHED
+    
     func9 = Button(funcframe, text='編輯不熟的單字', bg=OYELLOW, width=14, activebackground=DRKYLLW,
                    relief='groove', highlightbackground=OYELLOW)
     func9.pack()
+    func9.config(state="disabled")  ### DELETE THIS ROW AFTER FINISHED
+    
     func9 = Button(funcframe, text='變更練習的範圍', bg=OYELLOW, width=14, activebackground=DRKYLLW,
                    relief='groove', highlightbackground=OYELLOW)
     func9.pack()
+    func9.config(state="disabled")  ### DELETE THIS ROW AFTER FINISHED
+    
     funcsen = Button(funcframe, text='我要看範例造句', bg=OYELLOW, width=14, activebackground=DRKYLLW,
                    relief='groove', highlightbackground=OYELLOW)
     funcsen.pack(pady=(5,0))
+    funcsen.config(state="disabled")  ### DELETE THIS ROW AFTER FINISHED
+    
     func8 = Button(funcframe, text='查詢該單詞詞源', bg=OYELLOW, width=14, activebackground=DRKYLLW,
                    relief='groove', highlightbackground=OYELLOW, command=lambda:bopen('https://www.etymonline.com/search?q='+word))
     func8.pack(pady=(5,0))
@@ -200,7 +210,7 @@ def markAsUnskilled():
     global isFirstTimeMark
     if isFirstTimeMark:
         messagebox.showinfo("操作提示","標記此單字為不熟後，並累積足夠的不熟單字，"+\
-                            "即可點選右邊的「練習不熟的單字」，把不熟悉的單字加以練習以達到精熟。")
+                            "即可點選右邊的「練習不熟的單字」，把不熟悉的單字加以練習以達到精熟。（此功能尚未完成）")
         isFirstTimeMark = False
 
 def clearRecords():
@@ -374,6 +384,10 @@ def welcomeWindow():
     dbmenu.grid(row=0, column=1, pady=10)
     dbmenu.config(bg=BGCOLOR, width=50, activebackground=BGCOLOR, highlightbackground=BGCOLOR)
     dbmenu["menu"].config(bg=BGCOLOR, bd=0)
+    
+    for opt in range(2, len(lstDatabase)):
+        dbmenu["menu"].entryconfig(opt, state='disabled') # disable unfinished options
+
     confirm = Button(win, bg=DRKYLLW, text="確認", font=("微軟正黑體", 11), command=confirmCMD, 
                      activebackground=DRKYLLW, pady=1, padx=1)
     confirm.pack(pady=10)
